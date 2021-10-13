@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6u-w4BMUTPHjxsIPy-v.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6u8w4BMUTPHh30wWw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh7USew8.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHvxk.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh6UVew8.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh50Xew8.ttf) format('truetype');
+}
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #b9f5ff;
+}
+.App {
+  width: 800px;
+  height: 600px;
+  margin: auto;
+  background-color: #94e3ef;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+button {
+  width: 120px;
+  height: 40px;
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(2, 31, 42, 0.45);
+  background-color: #acffe3;
+  border: #82ced5 2px solid;
+  border-radius: 10%;
+  transition: 0.3s;
+}
+button:hover {
+  background-color: #97eed1;
+}
+input {
+  width: 500px;
+  height: 35px;
+  margin-top: 20px;
+  padding: 5px 10px;
+  font-size: 15px;
+  color: rgba(2, 31, 42, 0.45);
+  background-color: #b9f5ff;
+  outline: none;
+  border: #82ced5 2px solid;
+}
+.chat {
+  font-size: 20px;
+  color: rgba(2, 31, 42, 0.45);
+}
+.msg {
+  width: 450px;
+  height: 35px;
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.userMsg {
+  background-color: #70ccee;
+}
+.botMsg {
+  background-color: #b9f5ff;
+}
+/*# sourceMappingURL=style.css.map */
