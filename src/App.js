@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './style.css';
+//import './style.css';
+import { Input, InputAdornment } from '@mui/material';
+import { Send } from "@mui/icons-material";
+import Container from '@mui/material/Container';
+import Grid from "@mui/material/Grid";
+import SelectedListItem from "./list";
+
 
 function renderMessage(msg, i){
     let msgClass = msg.author==='user'?'userMsg':'botMsg';
@@ -9,9 +15,11 @@ function renderMessage(msg, i){
         </p>);
 }
 
+
 export function App(props) {
     const [messageList, setMessageList] = useState([]);
     const [messageText, setMessageText] = useState('');
+    const inputRef = React.useRef();
 
     function sendMessage() {
         if(messageText.length===0){
@@ -19,6 +27,13 @@ export function App(props) {
         }
         setMessageList([...messageList, {author: 'user', message: messageText}]);
         setMessageText('');
+        inputRef.current.focus();
+    }
+
+    const handlePressInput = ({code}) => {
+        if (code==="Enter" || code==="NumpadEnter"){
+            sendMessage();
+        }
     }
 
     useEffect(() => {
@@ -28,13 +43,34 @@ export function App(props) {
     }, [messageList]);
 
     return (
-        <div className="App">
-            <div className="chat">
-                {messageList.map((msg, i) => renderMessage(msg, i))}
-            </div>
-            <input type="text" id="msg_input" value={messageText} onChange={(event)=>setMessageText(event.target.value)}/>
-            <button onClick={sendMessage}>Отправить</button>
-        </div>
+        <Container maxWidth="md">
+            <Grid container spacing={2}>
+                <Grid item md={4}>
+                    <SelectedListItem />
+                </Grid>
+                <Grid item md={8}>
+                    <Input
+                        type="text"
+                        id="msg_input"
+                        inputRef={inputRef}
+                        value={messageText}
+                        onChange={(event)=>setMessageText(event.target.value)}
+                        onKeyPress={handlePressInput}
+                        autoFocus={true}
+                        fullWidth={true}
+                        autoComplete="off"
+                        placeholder="enter message"
+                        endAdornment={
+                            <InputAdornment position={"end"}>
+                                <Send className="icon" onClick={sendMessage}/>
+                            </InputAdornment>}
+                    />
+                    <div className="chat">
+                        {messageList.map((msg, i) => renderMessage(msg, i))}
+                    </div>
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
 

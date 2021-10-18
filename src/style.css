@@ -49,43 +49,25 @@ body,
   background-color: #b9f5ff;
 }
 .App {
-  width: 800px;
-  height: 600px;
+  width: 100%;
   margin: auto;
-  background-color: #94e3ef;
+  background-color: #b9f5ff;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
 }
-button {
-  width: 120px;
-  height: 40px;
-  margin-top: 10px;
-  font-size: 15px;
+.icon {
+  cursor: pointer;
   color: rgba(2, 31, 42, 0.45);
-  background-color: #acffe3;
-  border: #82ced5 2px solid;
-  border-radius: 10%;
-  transition: 0.3s;
-}
-button:hover {
-  background-color: #97eed1;
-}
-input {
-  width: 500px;
-  height: 35px;
-  margin-top: 20px;
-  padding: 5px 10px;
-  font-size: 15px;
-  color: rgba(2, 31, 42, 0.45);
-  background-color: #b9f5ff;
-  outline: none;
-  border: #82ced5 2px solid;
 }
 .chat {
   font-size: 20px;
   color: rgba(2, 31, 42, 0.45);
+  display: flex;
+  flex-direction: column;
+}
+.chatBox {
+  width: 100%;
 }
 .msg {
   width: 450px;
@@ -98,9 +80,11 @@ input {
   border-radius: 5px;
 }
 .userMsg {
-  background-color: #70ccee;
+  background-color: #94e3ef;
+  align-self: flex-end;
 }
 .botMsg {
-  background-color: #b9f5ff;
+  background-color: #70ccee;
+  align-self: flex-start;
 }
 /*# sourceMappingURL=style.css.map */
