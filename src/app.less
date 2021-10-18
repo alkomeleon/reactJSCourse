@@ -10,46 +10,28 @@ body, #root {
 }
 
 .App {
-  width: 800px;
-  height: 600px;
+  width: 100%;
   margin: auto;
-  background-color: @bgColor;
+  background-color: @mainColor;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
 }
 
-button {
-  width: 120px;
-  height: 40px;
-  margin-top: 10px;
-  font-size: 15px;
+.icon {
+  cursor: pointer;
   color: @textColor;
-  background-color: @buttonColor;
-  border: @borderColor 2px solid;
-  border-radius: 10%;
-  transition: 0.3s;
-  &:hover {
-    background-color: @hoverColor;
-  }
-}
-
-input {
-  width: 500px;
-  height: 35px;
-  margin-top: 20px;
-  padding: 5px 10px;
-  font-size: 15px;
-  color: @textColor;
-  background-color: @mainColor;
-  outline: none;
-  border: @borderColor 2px solid;
 }
 
 .chat {
   font-size: 20px;
   color: @textColor;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatBox {
+  width: 100%;
 }
 
 .msg {
@@ -64,10 +46,14 @@ input {
 }
 
 .userMsg {
-  background-color: @bgColor2;
+  background-color: @bgColor;
+  align-self: flex-end;
 }
 
 .botMsg {
-  background-color: @mainColor;
+  background-color: @bgColor2;
+  align-self: flex-start;
 }
+
+
 
