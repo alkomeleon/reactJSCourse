@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 
 
 
-export default function SelectedListItem(props) {
+export function ChatsList(props) {
     const initialSelectedIndex = props.selectedIndex || null;
     const chatList = props.chatList || [];
 
@@ -45,3 +45,5 @@ export default function SelectedListItem(props) {
         </Box>
     );
 }
+
+export default ChatsList;

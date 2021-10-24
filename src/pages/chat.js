@@ -1,27 +1,41 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import App from "../App";
-import React from "react";
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Container from '@mui/material/Container';
+import Grid from "@mui/material/Grid";
+import { ChatsList, Chat } from "../components";
+import { useParams } from 'react-router-dom';
 
-// const messages = {
-//     room1: [],
-//     room2: [],
-// }
-// messages[roomId]
+const chatList = [
+    {id: 1, name: 'chat 1'},
+    {id: 2, name: 'chat 2'},
+    {id: 3, name: 'chat 3'},
+    {id: 4, name: 'chat 4'},
+    {id: 5, name: 'chat 5'}
+];
 
-export function ChatPage() {
-    const { path, url } = useRouteMatch();
+export function ChatPage(props) {
+    const { chatId } = useParams();
+    const parsedChatId = parseInt(chatId);
+
+    let chatExists = false;
+    for (let i=0; i<chatList.length; i++) {
+        if (chatList[i].id === parsedChatId) {
+            chatExists = true;
+            break;
+        }
+    }
 
     return (
-    <Switch>
-        <Route path={url + "/:chatId"}>
-            <CssBaseline />
-            <App />
-        </Route>
-        <Route path={url + "*"}>
-            <CssBaseline />
-            <App />
-        </Route>
-    </Switch>
+        <Container maxWidth="md">
+            <Grid container spacing={2}>
+                <Grid item md={4}>
+                    <ChatsList selectedIndex={parsedChatId} chatList={chatList}/>
+                </Grid>
+                <Grid item md={8}>
+                    <Chat chatExists={chatExists}/>
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
+
+export default ChatPage;
