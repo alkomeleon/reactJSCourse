@@ -1,26 +1,31 @@
 import React, {useEffect, useState} from "react";
 import {Input, InputAdornment} from "@mui/material";
 import {Send} from "@mui/icons-material";
+import {useDispatch, useSelector} from "react-redux";
+import {messageListSelector, addMessage} from "../store/messages";
+import {chatValueSelector, setChatValue} from "../store/chat";
+
 
 function renderMessage(msg, i){
     let msgClass = msg.author==='user'?'userMsg':'botMsg';
     return (
         <p key={i} className={'msg '+msgClass}>
-            {msg.author}: {msg.message}
+            {msg.author}: {msg.text}
         </p>);
 }
 
 export function Chat(props) {
     const inputRef = React.useRef();
-    const [messageList, setMessageList] = useState([]);
-    const [messageText, setMessageText] = useState('');
+    const messageList = useSelector(messageListSelector(props.chatName));
+    const messageText = useSelector(chatValueSelector(props.chatName));
+    const dispatch = useDispatch();
 
     function sendMessage() {
-        if(messageText.length===0){
+        if(!messageText || messageText.length===0){
             return false;
         }
-        setMessageList([...messageList, {author: 'user', message: messageText}]);
-        setMessageText('');
+        dispatch(addMessage(props.chatName, messageText));
+        dispatch(setChatValue(props.chatName));
         inputRef.current.focus();
     }
 
@@ -30,13 +35,13 @@ export function Chat(props) {
         }
     }
 
-    useEffect(() => {
-        if (messageList.length === 0) return false;
-        if (messageList[messageList.length-1].author === 'bot') return false;
-        setTimeout(()=>setMessageList((messageList)=>[...messageList, {author: 'bot', message: 'hello'}]), 1000);
-    }, [messageList]);
+    // useEffect(() => {
+    //     if (messageList.length === 0) return false;
+    //     if (messageList[messageList.length-1].author === 'bot') return false;
+    //     setTimeout(()=>setMessageList((messageList)=>[...messageList, {author: 'bot', message: 'hello'}]), 1000);
+    // }, [messageList]);
 
-    function ChatBox(props) {
+    function ChatBox() {
         return (
             <>
                 <Input
@@ -44,7 +49,7 @@ export function Chat(props) {
                     id="msg_input"
                     inputRef={inputRef}
                     value={messageText}
-                    onChange={(event) => setMessageText(event.target.value)}
+                    onChange={(event) => dispatch(setChatValue(props.chatName, event.target.value))}
                     onKeyPress={handlePressInput}
                     autoFocus={true}
                     fullWidth={true}
@@ -63,7 +68,7 @@ export function Chat(props) {
     }
 
     return (
-        props.chatExists ? <ChatBox/> : <div>Выберите чат</div>
+        messageList!==null ? <ChatBox/> : <div>Выберите чат</div>
     );
 }
 

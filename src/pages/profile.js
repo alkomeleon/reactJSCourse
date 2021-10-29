@@ -8,11 +8,6 @@ export function ProfilePage() {
     const { showName } = useSelector(state => state);
     const dispatch = useDispatch();
 
-    const setShowName = useCallback(()=>{
-        dispatch(toggleShowName());
-    }, [dispatch]);
-
-
     return (
         <>
             <BackButton/>
@@ -21,7 +16,7 @@ export function ProfilePage() {
                 type="checkbox"
                 checked={showName}
                 value={showName}
-                onChange={setShowName}
+                onChange={()=>dispatch(toggleShowName())}
             />
             <span>Show Name</span>
             {showName && <div>Username</div>}

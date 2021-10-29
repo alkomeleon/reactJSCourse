@@ -10,7 +10,7 @@ export function App(props) {
             <Switch>
                 <Route path="/chats">
                     <Switch>
-                        <Route path={"/chats/:chatId"}>
+                        <Route path={"/chats/:chatName"}>
                             <ChatPage />
                         </Route>
                         <Route path={"/chats*"}>
