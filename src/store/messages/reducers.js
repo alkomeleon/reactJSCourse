@@ -10,7 +10,7 @@ export const messagesReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                [action.payload.chatName]: [...state[action.payload.chatName], {author: "user", text: action.payload.messageText}]
+                [action.payload.chatName]: [...state[action.payload.chatName], {author: action.payload.author, text: action.payload.messageText}]
             };
         case ADD_CHAT:
             return {
