@@ -2,17 +2,9 @@ import React, {useEffect, useState} from "react";
 import {Input, InputAdornment} from "@mui/material";
 import {Send} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {messageListSelector, addMessage} from "../store/messages";
+import {messageListSelector, addMessageWithThunk} from "../store/messages";
 import {chatValueSelector, setChatValue} from "../store/chat";
-
-
-function renderMessage(msg, i){
-    let msgClass = msg.author==='user'?'userMsg':'botMsg';
-    return (
-        <p key={i} className={'msg '+msgClass}>
-            {msg.author}: {msg.text}
-        </p>);
-}
+import {Message} from "./Message";
 
 export function Chat(props) {
     const inputRef = React.useRef();
@@ -24,7 +16,7 @@ export function Chat(props) {
         if(!messageText || messageText.length===0){
             return false;
         }
-        dispatch(addMessage(props.chatName, messageText));
+        dispatch(addMessageWithThunk(props.chatName, messageText));
         dispatch(setChatValue(props.chatName));
         inputRef.current.focus();
     }
@@ -34,12 +26,6 @@ export function Chat(props) {
             sendMessage();
         }
     }
-
-    // useEffect(() => {
-    //     if (messageList.length === 0) return false;
-    //     if (messageList[messageList.length-1].author === 'bot') return false;
-    //     setTimeout(()=>setMessageList((messageList)=>[...messageList, {author: 'bot', message: 'hello'}]), 1000);
-    // }, [messageList]);
 
     function ChatBox() {
         return (
@@ -61,7 +47,7 @@ export function Chat(props) {
                         </InputAdornment>}
                 />
                 <div className="chat">
-                    {messageList.map((msg, i) => renderMessage(msg, i))}
+                    {messageList.map((msg, i) => <Message msg={msg} key={i}/>)}
                 </div>
             </>
         );
