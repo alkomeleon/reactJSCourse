@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {ChatPage, MainPage, ProfilePage} from "./pages";
+import {ChatPage, MainPage, ProfilePage, GistsList} from "./pages";
 import CssBaseline from "@mui/material/CssBaseline";
 
 export function App(props) {
@@ -20,6 +20,9 @@ export function App(props) {
                 </Route>
                 <Route path="/profile">
                     <ProfilePage />
+                </Route>
+                <Route path="/gists">
+                    <GistsList />
                 </Route>
                 <Route path="/">
                     <MainPage />

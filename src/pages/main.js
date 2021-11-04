@@ -7,6 +7,8 @@ export function MainPage() {
             <Link to="/chats">chats</Link>
             <br/>
             <Link to="/profile">profile</Link>
+            <br/>
+            <Link to="/gists">gists</Link>
         </>
     );
 }
