@@ -1,4 +1,4 @@
-import { ADD_CHAT, DELETE_CHAT, SET_CHAT_VALUE } from "./types";
+import { SET_CHATS, UPDATE_CHATS } from "./types";
 
 const initialState = [
     {chatName: "chat1", value: ""}
@@ -6,29 +6,23 @@ const initialState = [
 
 export const chatReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_CHAT:
-            let chatExist1 = state.find((item)=>item.chatName===action.payload);
-            if(chatExist1) return state;
-            return [
-                ...state,
-                {chatName: action.payload, value: ""}
-            ];
-        case DELETE_CHAT:
-            return state.filter(item=>action.payload!==item.chatName);
-            // if(action.payload!==item.chatName){
-            //     return true
-            // }
-            // return false)
-        case SET_CHAT_VALUE:
-            let chatExist2 = state.find((item)=>item.chatName===action.payload.chatName);
-            if(!chatExist2) return state;
-            return state.map((item)=>{
-                if(item.chatName===action.payload.chatName){
-                    return {chatName: action.payload.chatName, value: action.payload.value}
-                } else {
-                    return item;
-                }
-            });
+        case SET_CHATS:
+            return action.payload;
+        case UPDATE_CHATS:
+            if (state.find((item)=>item.chatName===action.payload.chatName)) {
+                return state.map((item)=>{
+                    if(item.chatName===action.payload.chatName){
+                        return {chatName: action.payload.chatName, value: action.payload.value}
+                    } else {
+                        return item;
+                    }
+                });
+            } else {
+                return [
+                    ...state,
+                    {chatName: action.payload.chatName, value: action.payload.value}
+                ];
+            }
         default:
             return state;
     }

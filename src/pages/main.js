@@ -1,14 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Menu } from "../components"
 
 export function MainPage() {
+
     return (
         <>
-            <Link to="/chats">chats</Link>
-            <br/>
-            <Link to="/profile">profile</Link>
-            <br/>
-            <Link to="/gists">gists</Link>
+        <Menu/>
         </>
     );
 }

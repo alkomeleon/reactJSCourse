@@ -2,12 +2,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import InboxIcon from "@mui/icons-material/Inbox";
 import ListItemText from "@mui/material/ListItemText";
-import React from "react";
+import React, {useEffect} from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import { useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
-import {chatsSelector, addChat} from "../store/chat";
+import {chatsSelector, addChatFB, initChatsTracking, getChatsFB} from "../store/chat";
 import Button from '@mui/material/Button';
 
 
@@ -22,6 +22,11 @@ export function ChatsList(props) {
         setSelectedIndex(index);
         history.push('/chats/'+index);
     };
+
+    useEffect(()=>{
+        dispatch(getChatsFB());
+        dispatch(initChatsTracking());
+    }, []);
 
     function showChatList(listItem) {
         return (
@@ -42,7 +47,7 @@ export function ChatsList(props) {
     function handleNewChatClick() {
         let newChatName = prompt("Введите название чата");
         if (newChatName.length===0) return false;
-        dispatch(addChat(newChatName));
+        dispatch(addChatFB(newChatName));
     }
 
     return (

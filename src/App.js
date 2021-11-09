@@ -1,14 +1,23 @@
-import React from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {ChatPage, MainPage, ProfilePage, GistsList} from "./pages";
+import React, {useEffect} from 'react';
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {ChatPage, MainPage, ProfilePage, GistsList, SignUp, Login} from "./pages";
 import CssBaseline from "@mui/material/CssBaseline";
+import {PrivateRoute, PublicRoute} from "./route/route";
+import {useDispatch, useSelector} from "react-redux";
+import {sessionSelector, onAuthStateChanged} from "./store/session";
+
 
 export function App(props) {
+    const user = useSelector(sessionSelector);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(onAuthStateChanged());
+    }, [dispatch]);
     return (
         <BrowserRouter>
             <CssBaseline />
             <Switch>
-                <Route path="/chats">
+                <PrivateRoute authenticated={user} path="/chats">
                     <Switch>
                         <Route path={"/chats/:chatName"}>
                             <ChatPage />
@@ -17,16 +26,22 @@ export function App(props) {
                             <ChatPage />
                         </Route>
                     </Switch>
-                </Route>
-                <Route path="/profile">
+                </PrivateRoute>
+                <PrivateRoute authenticated={user} path="/profile">
                     <ProfilePage />
-                </Route>
-                <Route path="/gists">
+                </PrivateRoute>
+                <PrivateRoute authenticated={user} path="/gists">
                     <GistsList />
-                </Route>
-                <Route path="/">
+                </PrivateRoute>
+                <PublicRoute authenticated={user} path="/signup">
+                    <SignUp />
+                </PublicRoute>
+                <PublicRoute authenticated={user} path="/login">
+                    <Login />
+                </PublicRoute>
+                <PublicRoute authenticated={user} path="/">
                     <MainPage />
-                </Route>
+                </PublicRoute>
             </Switch>
         </BrowserRouter>
     );

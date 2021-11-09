@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Input, InputAdornment} from "@mui/material";
 import {Send} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {messageListSelector, addMessageWithThunk} from "../store/messages";
-import {chatValueSelector, setChatValue} from "../store/chat";
+import {messageListSelector, addMessageWithThunk, initMessageTracking, getMessagesFB } from "../store/messages";
+import {chatValueSelector, setChatValueFB} from "../store/chat";
 import {Message} from "./Message";
 
 export function Chat(props) {
@@ -12,12 +12,20 @@ export function Chat(props) {
     const messageText = useSelector(chatValueSelector(props.chatName));
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        dispatch(initMessageTracking());
+    }, []);
+
+    useEffect(()=>{
+        if (props.chatName) dispatch(getMessagesFB(props.chatName));
+    }, [props.chatName]);
+
     function sendMessage() {
         if(!messageText || messageText.length===0){
             return false;
         }
         dispatch(addMessageWithThunk(props.chatName, messageText));
-        dispatch(setChatValue(props.chatName));
+        dispatch(setChatValueFB(props.chatName));
         inputRef.current.focus();
     }
 
@@ -35,7 +43,7 @@ export function Chat(props) {
                     id="msg_input"
                     inputRef={inputRef}
                     value={messageText}
-                    onChange={(event) => dispatch(setChatValue(props.chatName, event.target.value))}
+                    onChange={(event) => dispatch(setChatValueFB(props.chatName, event.target.value))}
                     onKeyPress={handlePressInput}
                     autoFocus={true}
                     fullWidth={true}

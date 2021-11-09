@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import CircularProgress from "@mui/material/CircularProgress";
 import {useSelector, useDispatch} from "react-redux";
 import {gistsSelector, getAllGists } from "../store/gists";

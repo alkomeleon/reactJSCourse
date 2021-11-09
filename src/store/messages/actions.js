@@ -1,12 +1,8 @@
-import { ADD_MESSAGE } from "./types"
+import {SET_MESSAGES} from "./types";
 
-export const addMessage  = (chatName, messageText, author="user") => {
+export const setMessages = (payload) => {
     return {
-        type: ADD_MESSAGE,
-        payload: {chatName, messageText, author}
-        // payload: {
-        //     chatId: chatId,
-        //     messageText: messageText
-        // }
-    };
-};
+        type: SET_MESSAGES,
+        payload,
+    }
+}
