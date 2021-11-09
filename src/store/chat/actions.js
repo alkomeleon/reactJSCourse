@@ -1,22 +1,8 @@
-import { ADD_CHAT, DELETE_CHAT, SET_CHAT_VALUE } from "./types"
+import { SET_CHATS } from "./types"
 
-export const addChat  = (chatName) => {
+export const setChats  = (chats) => {
     return {
-        type: ADD_CHAT,
-        payload: chatName
-    };
-};
-
-export const deleteChat  = (chatName) => {
-    return {
-        type: DELETE_CHAT,
-        payload: chatName
-    };
-};
-
-export const setChatValue  = (chatName, value) => {
-    return {
-        type: SET_CHAT_VALUE,
-        payload: {chatName, value}
+        type: SET_CHATS,
+        payload: chats
     };
 };

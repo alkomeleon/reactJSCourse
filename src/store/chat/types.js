@@ -1,3 +1,2 @@
-export const ADD_CHAT = "ADD_CHAT";
-export const DELETE_CHAT = "DELETE_CHAT";
-export const SET_CHAT_VALUE = "SET_CHAT_VALUE";
+export const SET_CHATS = "SET_CHATS";
+export const UPDATE_CHATS = "UPDATE_CHATS";

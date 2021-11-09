@@ -1,11 +1,11 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleShowName } from "../store/profile";
 import { BackButton } from "../components";
 
 
 export function ProfilePage() {
-    const { showName } = useSelector(state => state);
+    const { showName } = useSelector(state => state.profile);
     const dispatch = useDispatch();
 
     return (

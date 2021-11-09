@@ -1,5 +1,4 @@
-import { ADD_MESSAGE } from "./types";
-import { ADD_CHAT } from "../chat/types";
+import { SET_MESSAGES } from "./types";
 
 const initialState = {
     chat1: [{author: "bot", text: "this is chat1"}]
@@ -7,16 +6,13 @@ const initialState = {
 
 export const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case SET_MESSAGES: {
             return {
                 ...state,
-                [action.payload.chatName]: [...state[action.payload.chatName], {author: action.payload.author, text: action.payload.messageText}]
+                [action.payload.chatName]: action.payload.messages,
             };
-        case ADD_CHAT:
-            return {
-                ...state,
-                [action.payload]: [{author: "bot", text: `this is ${action.payload}`}]
-            };
+        }
+
         default:
             return state;
     }
