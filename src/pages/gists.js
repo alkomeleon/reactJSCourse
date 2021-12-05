@@ -11,10 +11,7 @@ export const GistsList = () => {
         dispatch(getAllGists());
     }, []);
 
-    const renderGist = useCallback(
-        (gist) => <li key={gist.id}>{gist.description || 'No description'}</li>,
-        []
-    );
+    const renderGist = (gist) => <li key={gist.id}>{gist.description || 'No description'}</li>;
 
     if (loading) {
         return <CircularProgress />;

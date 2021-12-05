@@ -8,14 +8,14 @@ import { persistStore, persistReducer } from 'redux-persist';
 import {gistsReducer} from "./gists";
 import {sessionReducer} from "./session";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
 
 const persistConfig = {
     key: 'root',
     storage,
 }
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     profile: profileReducer,
     chat: chatReducer,
     messages: messagesReducer,
