@@ -55,7 +55,7 @@ export function Chat(props) {
                         </InputAdornment>}
                 />
                 <div className="chat">
-                    {messageList.map((msg, i) => <Message msg={msg} key={i}/>)}
+                    {messageList.map((msg, i) => <Message msg={msg} index={i} key={i}/>)}
                 </div>
             </>
         );
